@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Igraci</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<h1>NBA League Leaders</h1>
+<nav>
+		<ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/forms/add">Add Player</a></li>
+        </ul>
+</nav>
+
+	<section id="pretraga">
+		
+		<h1>Filtriranje</h1>
+		<label>Position</label>
+		<select id="position">
+				<option value="null">Choose position</option>
+			{{#each pozicije}}
+				<option value="{{this}}">{{this}}</option>
+			{{/each}}
+		</select>
+	
+	</section>
+
+    
+    <hr>
+    
+    <section id="prikaz">
+  
+	{{#if persons}}
+		
+		<table style="border: 1px solid black;">
+			<thead>
+			
+				<tr>
+					<th style="border: 1px solid black;">First Name</th>
+					<th style="border: 1px solid black;">Last Name</th>
+					<th style="border: 1px solid black;">Position</th>
+					<th style="border: 1px solid black;">Points per game</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each persons}}
+				<tr>
+					<td style="border: 1px solid black;">{{this.firstName}}</td>
+					<td style="border: 1px solid black;">{{this.lastName}}</td>
+					<td style="border: 1px solid black;">{{this.position}}</td>
+            		<td style="border: 1px solid black;text-align:center">{{this.pointsPerGame}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		{{else}}
+		<p><strong>Ne postoje igraci!</strong></p>
+	{{/if}}
+	
+	</section>
+	
+	<script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    
+    <script>
+    
+    
+    	let prikaz=document.querySelector("#prikaz");
+    	function prikaziPodatke(lista){
+    		prikaz.innerHTML="";
+    		let html="";
+    		for(let item of lista){
+    			html+=`
+    			<table style="border: 1px solid black;">
+			<thead>
+				<tr>
+					<th style="border: 1px solid black;">First Name</th>
+					<th style="border: 1px solid black;">Last Name</th>
+					<th style="border: 1px solid black;">Position</th>
+					<th style="border: 1px solid black;">Points per game</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="border: 1px solid black;">${item.firstName}</td>
+					<td style="border: 1px solid black;">${item.lastName}</td>
+					<td style="border: 1px solid black;">${item.position}</td>
+            		<td style="border: 1px solid black;text-align:center">${item.pointsPerGame}</td>
+				</tr>
+			</tbody>
+		</table>`;
+						
+				html+=`</div>
+				</div>`;
+    		}
+    		prikaz.innerHTML=html;
+    		}
+    	
+    	document.querySelector("#position").onchange=function(){
+    		let element=document.querySelector("#position");
+    		$.ajax({
+    			url:"/api/filtrirajPozicija",
+    			method:"POST",
+    			data:{
+    				"position":element.value
+    			},
+    			success:function(response){
+    				let elementi=JSON.parse(response);
+    				prikaziPodatke(elementi);
+    			}
+    		});
+    	}
+    	
+    	
+    	
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Player</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <h3>Add player</h3>
+    <form action="/add" method="GET">
+    	<label>First name</label>
+    	<input type="text" name="firstName"><br><br>
+    	<label>Last name</label>
+    	<input type="text" name="lastName"><br><br>
+    	<label>Position</label>
+    	<input type="text" name="position"><br><br>
+    	<label>Points per game</label>
+    	<input type="text" name="pointsPerGame"><br><br>
+    	<button type="submit">Submit player</button>
+    </form>
+</body>
+</html>

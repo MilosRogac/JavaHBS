@@ -1,0 +1,20 @@
+body {
+    margin: 10px 120px 20px 8px;
+}
+
+.page-title {
+    color: #7c795d;
+    font-family: 'Courier New', serif;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0;
+}
+
+.player {
+    background-color: #e9e9e9;
+    padding: 10px;
+    border: 1px solid #888;
+    margin: 5px 0 10px 0;
+}
+
